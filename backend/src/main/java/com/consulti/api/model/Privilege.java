@@ -7,6 +7,7 @@ import lombok.Getter;
 import java.util.Collection;
 
 @Entity
+@Table(name="option")
 public class Privilege{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +18,7 @@ public class Privilege{
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "roles_privileges",
+            name = "roles_options",
             joinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(

@@ -109,11 +109,11 @@ public class ExcelService {
                     register.getCheckOut().getSecond()
             );
 
-            String employeeName= register.getUser().getFirstName()+" "+register.getUser().getLastName();
+//            String employeeName= register.getUser().getFirstName()+" "+register.getUser().getLastName();
             LocalDate dateRegister = register.getCheckIn().toLocalDate();
 
             createCell(row, columnCount++, register.getUser().getId(),styleBody);
-            createCell(row, columnCount++, employeeName, styleBody);
+//            createCell(row, columnCount++, employeeName, styleBody);
             createCell(row, columnCount++, timeIn, styleBody);
             createCell(row, columnCount++, timeOut, styleBody);
             createCell(row, columnCount++, dateRegister, styleBody);

@@ -26,7 +26,7 @@ public class AttendanceRecord extends BaseEntity{
     }
 
     public void setIdentityCard(String identityCard) {
-        this.user.setIdentityCard(Integer.valueOf(identityCard));
+//        this.user.setIdentityCard(Integer.valueOf(identityCard));
     }
 
     public void setCheckInTime(LocalDateTime checkInRegister) {

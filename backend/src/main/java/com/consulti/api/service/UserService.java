@@ -49,10 +49,10 @@ public class UserService {
         try {
             User userObject=new User(
                     body.userName,
-                    body.firstName,
-                    body.lastName,
-                    Integer.parseInt(body.identityCard),
-                    LocalDate.parse(body.dateOfBirth),
+//                    body.firstName,
+//                    body.lastName,
+//                    Integer.parseInt(body.identityCard),
+//                    LocalDate.parse(body.dateOfBirth),
                     body.password,
                     false
             );

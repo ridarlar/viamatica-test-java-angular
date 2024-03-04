@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -56,19 +57,19 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         List<Privilege> adminPrivileges = Arrays.asList(
                 readPrivilege, writePrivilege);
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
-        createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
+        createRoleIfNotFound("ROLE_USER", Collections.singletonList(readPrivilege));
 
         Role adminRole = roleRepository.findOneByName("ROLE_ADMIN");
         User user = new User();
         user.setUserName("admin");
-        user.setFirstName("Richard");
-        user.setLastName("Aguilar");
-        user.setIdentityCard(125361346);
-        user.setDob(LocalDate.of(2000,3,2));
+//        user.setFirstName("Richard");
+//        user.setLastName("Aguilar");
+//        user.setIdentityCard(125361346);
+//        user.setDob(LocalDate.of(2000,3,2));
         user.setPassword("admin");
         user.setIsAdmin(true);
         user.setPasswordEncripted(user.getPassword());
-        user.setRoles(Arrays.asList(adminRole));
+        user.setRoles(Collections.singletonList(adminRole));
         userRepository.save(user);
 
         alreadySetup = true;
