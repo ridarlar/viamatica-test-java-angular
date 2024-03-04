@@ -2,15 +2,18 @@ package com.consulti.api.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 
 @Getter
+@Setter
 @ToString
 @MappedSuperclass
 public abstract class BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +27,7 @@ public abstract class BaseEntity {
     @Column(name="updatedAt")
     private LocalDateTime updatedAt;
 
+    @Setter
     @Column(name="updatedBy")
     private String updatedBy;
 
@@ -46,17 +50,8 @@ public abstract class BaseEntity {
         return isDeleted;
     }
 
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
-    }
-
-    public void setUpdatedBy(String userName) {
-        this.updatedBy = userName;
     }
 
     public void setIsDelete() {

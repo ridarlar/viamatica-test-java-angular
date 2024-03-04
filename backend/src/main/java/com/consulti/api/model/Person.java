@@ -25,8 +25,6 @@ public class Person extends BaseEntity{
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<User> users = new ArrayList<>();
 
-    public Person(){}
-
     public Person(String firstName, String lastName, Integer identityCard, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;

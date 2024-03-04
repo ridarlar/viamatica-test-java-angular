@@ -4,7 +4,7 @@ import com.consulti.api.dto.CreateUserDto;
 import com.consulti.api.dto.EditUserDto;
 import com.consulti.api.model.Role;
 import com.consulti.api.model.User;
-import com.consulti.api.repository.AttendanceRecordRepository;
+import com.consulti.api.repository.SessionRecordRepository;
 import com.consulti.api.repository.RoleRepository;
 import com.consulti.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +27,16 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     private UserRepository userRepository;
-    private AttendanceRecordRepository attendanceRecordRepository;
     private RoleRepository roleRepository;
 
     @Autowired
     public UserService(
             UserRepository userRepository,
             RoleRepository roleRepository,
-            AttendanceRecordRepository attendanceRecordRepository
+            SessionRecordRepository attendanceRecordRepository
     ) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.attendanceRecordRepository=attendanceRecordRepository;
     }
 
     public UserService() {
@@ -49,16 +47,12 @@ public class UserService {
         try {
             User userObject=new User(
                     body.userName,
-//                    body.firstName,
-//                    body.lastName,
-//                    Integer.parseInt(body.identityCard),
-//                    LocalDate.parse(body.dateOfBirth),
                     body.password,
                     false
             );
             Role userRole= this.roleRepository.findOneByName("ROLE_USER");
 
-            userObject.setRoles(Arrays.asList(userRole));
+            userObject.setRoles(Collections.singletonList(userRole));
 
             userObject.setPasswordEncripted(userObject.getPassword());
             user=this.userRepository.save(userObject);
@@ -98,24 +92,8 @@ public class UserService {
 
             if (optionalUser!=null) {
 
-                if(body.userName != null){
+                if(body.userName != null) {
                     optionalUser.setUserName(body.userName);
-                }
-
-                if (body.firstName != null) {
-                    optionalUser.setFirstName(body.firstName);
-                }
-
-                if (body.lastName != null) {
-                    optionalUser.setLastName(body.lastName);
-                }
-
-                if (body.identityCard != null) {
-                    optionalUser.setIdentityCard(Integer.parseInt(body.identityCard));
-                }
-
-                if (body.dateOfBirth != null) {
-                    optionalUser.setDob(LocalDate.parse(body.dateOfBirth));
                 }
 
                 return userRepository.save(optionalUser);

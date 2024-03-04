@@ -8,25 +8,22 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name="attendanceRecord")
-public class AttendanceRecord extends BaseEntity{
+@Table(name="sessionRecord")
+public class SessionRecord extends BaseEntity{
     @ManyToOne
-    @JoinColumn(name="userId")
+    @JoinColumn(name="user_id")
     private User user;
 
     private LocalDateTime checkIn;
 
     private LocalDateTime  checkOut;
 
-    public AttendanceRecord() {
-
-    }
-    public AttendanceRecord(User user) {
+    public SessionRecord(User user) {
         this.user = user;
     }
 
-    public void setIdentityCard(String identityCard) {
-//        this.user.setIdentityCard(Integer.valueOf(identityCard));
+    public SessionRecord() {
+
     }
 
     public void setCheckInTime(LocalDateTime checkInRegister) {
