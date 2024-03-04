@@ -32,14 +32,14 @@ public class Person extends BaseEntity{
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void addUser(User user) {
-        users.add(user);
-        user.setPerson(this);
-    }
-
-    public void removeUser(User user) {
-        users.remove(user);
-        user.setPerson(null);
-    }
+//    public void addUser(User user) {
+//        users.add(user);
+//        user.setPerson(this);
+//    }
+//
+//    public void removeUser(User user) {
+//        users.remove(user);
+//        user.setPerson(null);
+//    }
 
 }

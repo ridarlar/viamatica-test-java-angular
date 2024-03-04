@@ -44,8 +44,8 @@ public class PesonService {
         return new PageImpl<>(list, pageable, content.getTotalElements());
     }
 
-    public Optional<Person> updatePersonByBoddy(EditPersonDto body) throws RuntimeException{
-        Optional<Person> person;
+    public Person updatePersonByBoddy(EditPersonDto body) throws RuntimeException{
+        Person person;
         try{
             person= this.personRespository.findByIdentityCard(body.identityCard);
         }catch(Exception e){

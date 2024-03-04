@@ -2,8 +2,10 @@ package com.consulti.api.service;
 
 import com.consulti.api.dto.CreateUserDto;
 import com.consulti.api.dto.EditUserDto;
+import com.consulti.api.model.Person;
 import com.consulti.api.model.Role;
 import com.consulti.api.model.User;
+import com.consulti.api.repository.PersonRespository;
 import com.consulti.api.repository.SessionRecordRepository;
 import com.consulti.api.repository.RoleRepository;
 import com.consulti.api.repository.UserRepository;
@@ -28,15 +30,18 @@ import java.util.stream.Collectors;
 public class UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private PersonRespository personRepository;
 
     @Autowired
     public UserService(
             UserRepository userRepository,
             RoleRepository roleRepository,
-            SessionRecordRepository attendanceRecordRepository
+            SessionRecordRepository sessionRecordRepository,
+            PersonRespository personRepository
     ) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.personRepository=personRepository;
     }
 
     public UserService() {
@@ -45,10 +50,16 @@ public class UserService {
     public User addNewUser(CreateUserDto body){
         User user=null;
         try {
+            Person ownerPerson=this.personRepository.findByIdentityCard(
+                    Integer.parseInt(body.ownerPersonIdentityCard)
+            );
             User userObject=new User(
                     body.userName,
                     body.password,
-                    false
+                    false,
+                    body.email,
+                    body.sessionActive,
+                    ownerPerson
             );
             Role userRole= this.roleRepository.findOneByName("ROLE_USER");
 

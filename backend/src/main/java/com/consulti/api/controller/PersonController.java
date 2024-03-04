@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/person")
@@ -32,14 +32,13 @@ public class PersonController {
         return this.personService.addNewPerson(body);
     }
 
-    @GetMapping
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public Page<Person> findAllPersonsPaged(Pageable pageable){
         return this.personService.findAllPersonsPaged(pageable);
     }
 
-    @GetMapping
-    @PutMapping
+    @PutMapping()
     @ResponseStatus(HttpStatus.OK)
     public Person updatePerson(@RequestBody EditPersonDto body){
         return this.personService.updatePersonByBoddy(body);
